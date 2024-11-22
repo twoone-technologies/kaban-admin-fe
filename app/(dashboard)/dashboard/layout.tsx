@@ -1,11 +1,22 @@
-import React from 'react'
+'use client';
+import React from 'react';
+import Navigation from './_components/Navigation';
+import SideBar from './_components/SideBar';
 
-function layout() {
-    return (
-        <div>
-            Dashboard Layout
-        </div>
-    )
+function layout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <div className="text-text flex relative">
+      <SideBar />
+      <div className='w-full'>
+        <Navigation />
+        {children}
+      </div>
+    </div>
+  );
 }
 
-export default layout
+export default layout;

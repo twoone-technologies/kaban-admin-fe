@@ -1,0 +1,9 @@
+export { default as DashboardIcon } from "./dashboard.svg";
+export { default as InboxIcon } from "./inbox.svg"
+export { default as ListingsIcon } from "./listings.svg"
+export { default as PostIcon } from "./post.svg"
+export { default as RealtorsIcon } from "./realtors.svg"
+export { default as ReportIcon } from "./report.svg"
+export { default as BellIcon } from "./bell.svg"
+export { default as LogoIcon } from "./logo.svg"
+export { default as UserIcon } from "./user.svg"
