@@ -4,7 +4,13 @@ import { BellIcon } from '@/public/icons';
 import { Search } from 'lucide-react';
 import { SquareMenu } from 'lucide-react';
 
-export default function Navigation({onClick, isMobile}: {onClick: () => void, isMobile: boolean}) {
+export default function Navigation({
+  onClick,
+  isMobile,
+}: {
+  onClick: () => void;
+  isMobile: boolean;
+}) {
   const path = usePathname();
   const pathName = path.split('/')[2];
 
@@ -13,10 +19,12 @@ export default function Navigation({onClick, isMobile}: {onClick: () => void, is
   }
 
   return (
-    <div className="flex w-full p-2 justify-between items-center">
+    <div
+      className={`border-b flex w-full p-2 justify-between sticky top-0 items-center border-accent bg-background`}
+    >
       <span>{pathName ? capitalizeString(pathName) : 'Dashboard'}</span>
       {isMobile ? (
-        <div className='z-50' onClick={onClick}>
+        <div className="z-50" onClick={onClick}>
           <SquareMenu />
         </div>
       ) : (

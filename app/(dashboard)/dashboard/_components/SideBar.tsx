@@ -100,9 +100,7 @@ function SideBar({
         ></button>
         <div
           className={`${
-            !isCollapsed
-              ? 'w-[145px] h-[100px]'
-              : 'w-[60px] h-[60px]'
+            !isCollapsed ? 'w-[145px] h-[100px]' : 'w-[60px] h-[60px]'
           } flex gap-1 text-2xl font-bold justify-center items-baseline text-white transition-all duration-300`}
         >
           <LogoIcon className="relative  top-[6px] w-[3rem] h-[3rem]" />
@@ -156,56 +154,55 @@ function SideBar({
           />
         </div>
       </aside>
-
-      {showSidebar && (
-        <aside
-          className={`flex md:hidden flex-col absolute bg-background items-center top-0 h-screen px-2 py-2 transition-all duration-300 w-full z-50`}
-        >
-          <div className="flex justify-between items-center w-full">
-            <div
-              className={`flex gap-1 text-2xl font-bold items-baseline text-white transition-all duration-300`}
-            >
-              <LogoIcon className="relative  top-[6px] w-[3rem] h-[3rem]" />
-              Kaban
-            </div>
+      <aside
+        className={`${
+          showSidebar ? 'flex' : 'translate-x-[-120%]'
+        } md:hidden flex-col absolute bg-background items-center top-0 h-screen px-2 py-2 transition-all duration-300 w-full z-50`}
+      >
+        <div className="flex justify-between items-center w-full">
+          <div
+            className={`flex gap-1 text-2xl font-bold items-baseline text-white transition-all duration-300`}
+          >
+            <LogoIcon className="relative  top-[6px] w-[3rem] h-[3rem]" />
+            Kaban
           </div>
-          <div className="flex flex-col w-full justify-between h-full">
-            <div className="mt-10 w-full px-2">
-              <div className="flex w-full justify-between items-center text-sm font-medium">
-                Menu
-                <div className="flex gap-4 items-center">
-                  <Search className="h-5 w-5" />
-                  <BellIcon className="h-5 w-5" />
-                </div>
-              </div>
-              <div className="mt-5 flex flex-col gap-5">
-                {sideBarContent.map((item) => (
-                  <Link
-                    href={item.path}
-                    className={`group flex items-center gap-2 px-4 py-3 font-medium rounded-md text-text hover:text-text-active hover:bg-accent-foreground transition-all duration-300 ${
-                      isActiveBar(item.path)
-                        ? 'text-text-active bg-accent-foreground'
-                        : 'text-text'
-                    }`}
-                    key={item.id}
-                    title={item.name}
-                  >
-                    <div className="hover:text-red-500">{item.icon1}</div>
-                    {!isCollapsed && (
-                      <span className="text-sm font-medium">{item.name}</span>
-                    )}
-                  </Link>
-                ))}
+        </div>
+        <div className="flex flex-col w-full justify-between h-full">
+          <div className="mt-10 w-full px-2">
+            <div className="flex w-full justify-between items-center text-sm font-medium">
+              Menu
+              <div className="flex gap-4 items-center">
+                <Search className="h-5 w-5" />
+                <BellIcon className="h-5 w-5" />
               </div>
             </div>
-            <ProfileCard
-              className="w-full relative  px-2"
-              role={'admin'}
-              name={'sprite can'}
-            />
+            <div className="mt-5 flex flex-col gap-5">
+              {sideBarContent.map((item) => (
+                <Link
+                  href={item.path}
+                  className={`group flex items-center gap-2 px-4 py-3 font-medium rounded-md text-text hover:text-text-active hover:bg-accent-foreground transition-all duration-300 ${
+                    isActiveBar(item.path)
+                      ? 'text-text-active bg-accent-foreground'
+                      : 'text-text'
+                  }`}
+                  key={item.id}
+                  title={item.name}
+                >
+                  <div className="hover:text-red-500">{item.icon1}</div>
+                  {!isCollapsed && (
+                    <span className="text-sm font-medium">{item.name}</span>
+                  )}
+                </Link>
+              ))}
+            </div>
           </div>
-        </aside>
-      )}
+          <ProfileCard
+            className="w-full relative  px-2"
+            role={'admin'}
+            name={'sprite can'}
+          />
+        </div>
+      </aside>
     </>
   );
 }

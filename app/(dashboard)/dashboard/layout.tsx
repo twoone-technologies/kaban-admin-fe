@@ -16,7 +16,7 @@ export default function Layout({
   return (
     <div className="text-text flex relative">
       <SideBar showSidebar={showSidebar} setShowSidebar={setShowSidebar} isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}/>
-      <div className='w-full'>
+      <div className='w-full relative'>
         <Navigation onClick={() => setShowSidebar(prev => !prev)} isMobile={isMobile} />
         {children}
       </div>
