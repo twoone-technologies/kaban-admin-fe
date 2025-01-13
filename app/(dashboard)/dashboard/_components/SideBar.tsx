@@ -1,5 +1,5 @@
 'use client';
-import { BellIcon, ChevronLeft, Search } from 'lucide-react';
+import { BellIcon, ChevronLeft, SquareX, Search } from 'lucide-react';
 // import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -25,7 +25,6 @@ export interface IsCollapsedProps {
 
 function SideBar({
   isCollapsed,
-  // isMobile,
   setIsCollapsed,
   showSidebar,
   setShowSidebar,
@@ -95,9 +94,6 @@ function SideBar({
         className={`hidden md:flex flex-col md:sticky top-0 h-screen border-accent border-r-2 px-2 py-2 transition-all duration-300
         ${isCollapsed ? 'w-[80px]' : 'w-[330px]'}`}
       >
-        <button
-          onClick={() => setShowSidebar && setShowSidebar((prev) => !prev)}
-        ></button>
         <div
           className={`${
             !isCollapsed ? 'w-[145px] h-[100px]' : 'w-[60px] h-[60px]'
@@ -166,6 +162,9 @@ function SideBar({
             <LogoIcon className="relative  top-[6px] w-[3rem] h-[3rem]" />
             Kaban
           </div>
+          <button onClick={() => setShowSidebar && setShowSidebar(false)}>
+            <SquareX />
+          </button>
         </div>
         <div className="flex flex-col w-full justify-between h-full">
           <div className="mt-10 w-full px-2">

@@ -24,7 +24,7 @@ export default function Navigation({
     >
       <span>{pathName ? capitalizeString(pathName) : 'Dashboard'}</span>
       {isMobile ? (
-        <div className="z-50" onClick={onClick}>
+        <div className="" onClick={onClick}>
           <SquareMenu />
         </div>
       ) : (
