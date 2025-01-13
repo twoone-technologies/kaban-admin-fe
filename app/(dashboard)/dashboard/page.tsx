@@ -55,7 +55,7 @@ function AdminDashboard() {
   return (
     <Container element="section" className="flex flex-col gap-8">
       <h1 className="text-white">Welcome to Kaban Nigeria</h1>
-      <div className="p-3 flex flex-col border border-accent gap-4 rounded-lg">
+      <div className="p-3 flex min-w-max flex-col border border-accent gap-4 rounded-lg">
         <div className="w-full justify-between flex">
           <div>
             <h2>TOTAL PROPERTIES</h2>

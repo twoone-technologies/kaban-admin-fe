@@ -16,7 +16,12 @@ type TableProps = {
   others?: boolean;
 };
 
-export default function TanstackTable({ columns, data, checkbox, others }: TableProps) {
+export default function TanstackTable({
+  columns,
+  data,
+  checkbox,
+  others,
+}: TableProps) {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState(new Set<number>());
 
@@ -53,13 +58,15 @@ export default function TanstackTable({ columns, data, checkbox, others }: Table
       <thead className="text-left bg-accent rounded-md">
         {table.getHeaderGroups().map((headerGroup) => (
           <tr key={headerGroup.id} className="rounded-md">
-            {checkbox &&  <th className="rounded-l-md">
-              <input
-                type="checkbox"
-                checked={selectAll}
-                onChange={handleSelectAll}
-              />
-            </th>}
+            {checkbox && (
+              <th className="rounded-l-md">
+                <input
+                  type="checkbox"
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                />
+              </th>
+            )}
             {headerGroup.headers.map((header) => (
               <th key={header.id} className="px-3">
                 {flexRender(
@@ -83,21 +90,22 @@ export default function TanstackTable({ columns, data, checkbox, others }: Table
             }`}
             style={{ padding: '10px 0' }}
           >
-            {checkbox && <td>
-              <input
-                type="checkbox"
-                checked={selectedRows.has(rowIndex)}
-                onChange={() => handleRowSelect(rowIndex)}
-              />
-            </td>}
+            {checkbox && (
+              <td>
+                <input
+                  type="checkbox"
+                  checked={selectedRows.has(rowIndex)}
+                  onChange={() => handleRowSelect(rowIndex)}
+                />
+              </td>
+            )}
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id} className="py-2 px-3">
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
-            <td>
-              {others ? 
-                <td className="py-2 px-3">
+              <td className="py-2 px-3">
+            {others ? (
                 <div className="flex space-x-2">
                   <DeleteIcon
                     onClick={() => console.log('Edit row:', row.id)}
@@ -106,8 +114,9 @@ export default function TanstackTable({ columns, data, checkbox, others }: Table
                     onClick={() => console.log('Delete row:', row.id)}
                   />
                 </div>
-              </td>
-              : <EllipsisVertical />}
+            ) : (
+              <EllipsisVertical />
+            )}
             </td>
           </tr>
         ))}

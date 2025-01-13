@@ -67,7 +67,7 @@ const RealtorColumns = [
 ] as unknown as ColumnDef<unknown, unknown>[];
 
   return (
-    <div className="border border-accent rounded-lg p-3">
+    <div className="border min-w-max border-accent rounded-lg p-3">
       <div className="flex justify-between items-center mb-4">
         <h2>All Realtors</h2>
         <div className="flex gap-2">
