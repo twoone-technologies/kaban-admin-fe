@@ -105,7 +105,7 @@ export default function FormControl({
                         ...registerOptions,
                     })}
                     className={`${error ? 'border-red-600' : 'border-[#CBD5E1]'
-                        } rounded-md outline-none bg-transparent px-4 text-neutral-dark-2 w-full pr-10 font-light`}
+                        } ${props.className} rounded-md outline-none px-4 text-neutral-dark-2 w-full pr-10 font-light`}
                 />
                 {props.type === 'password' && (
                     <span
@@ -125,7 +125,7 @@ export default function FormControl({
                     required: props.required && 'This field is required',
                     ...registerOptions,
                 })}
-                className={`border rounded-md p-2 outline-none ${error ? 'border-red-600' : 'border-[#CBD5E1]'} w-full`}
+                className={`${props.className} rounded-md p-2 outline-none ${error ? 'border-red-600' : 'border-[#CBD5E1]'} w-full`}
             />
         );
     }

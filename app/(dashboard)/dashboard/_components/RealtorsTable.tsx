@@ -74,6 +74,7 @@ const RealtorColumns = [
           <form className="relative border border-accent rounded-md pl-5 py-2">
             <FormControl
               as="input"
+              className='bg-transparent'
               containerClass="bg-background rounded-md"
               placeholder="search here"
             />

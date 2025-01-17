@@ -13,6 +13,7 @@ import {
   ReportIcon,
 } from '@/public/icons';
 import ProfileCard from './ProfileCard';
+import { useState } from 'react';
 // import Image from 'next/image';
 
 export interface IsCollapsedProps {
@@ -32,10 +33,10 @@ function SideBar({
   const sideBarContent = [
     {
       id: 1,
-      name: 'Dashboard',
+      name: 'Overview',
       icon1: <DashboardIcon />,
       icon2: '/assets/icons/house-icon-green.svg',
-      path: '/dashboard',
+      path: '/dashboard/overview',
     },
     {
       id: 2,
@@ -75,18 +76,16 @@ function SideBar({
   ];
 
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  // console.log(pathname.split('/'))
 
   function isActiveBar(path: string) {
-    return pathname === path;
+    return pathname.startsWith(path);
   }
 
   const toggleCollapse = () => {
     if (setIsCollapsed) setIsCollapsed(!isCollapsed);
   };
-
-  // const handleSetShowSidebar = () => {
-  //   if (setShowSidebar) setShowSidebar((prevState: boolean) => !prevState);
-  // };
 
   return (
     <>
@@ -147,6 +146,8 @@ function SideBar({
             className="w-full relative px-2"
             role={'admin'}
             name={'sprite can'}
+            open={open}
+            onClick={() => setOpen(!open)}
           />
         </div>
       </aside>
@@ -196,9 +197,11 @@ function SideBar({
             </div>
           </div>
           <ProfileCard
-            className="w-full relative  px-2"
+            className="w-full relative px-2"
             role={'admin'}
             name={'sprite can'}
+            open={open}
+            onClick={() => setOpen(!open)}
           />
         </div>
       </aside>

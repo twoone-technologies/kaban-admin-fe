@@ -1,12 +1,19 @@
+'use client';
 import FormControl from '@/components/common/FormControl';
 import { SearchIcon } from 'lucide-react';
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
-import StatusBadge, { StatusProps } from "./StatusBadge";
-import TanstackTable from './TanstackTable';
+import TanstackTable from '../../_components/TanstackTable';
+import StatusBadge, { StatusProps } from '../../_components/StatusBadge';
+// import StatusBadge, { StatusProps } from ";
+import avatar from '@/public/icons/avatar.png';
+import Image from 'next/image';
+import Pagination from '../../_components/PaginationTool';
+// import TanstackTable from './TanstackTable';
 
 export default function PropertyListTable() {
   const columnHelper = createColumnHelper<{
     title: string;
+    image: string;
     type: string;
     realtor: string;
     status: [StatusProps['stat_1'], StatusProps['stat_2']];
@@ -17,6 +24,7 @@ export default function PropertyListTable() {
 const RealtorsData = [
   {
     title: 'luxury apartment',
+    image: avatar,
     realtor: 'John Doe',
     type: 'apartment',
     status: ['featured', 'rent'] as [StatusProps['stat_1'], StatusProps['stat_2']],
@@ -24,6 +32,7 @@ const RealtorsData = [
   },
   {
     title: 'luxury apartment',
+    image: avatar,
     realtor: 'Jane Smith',
     type: 'self-contained',
     status: ['denied', 'sale'] as [StatusProps['stat_1'], StatusProps['stat_2']],
@@ -31,6 +40,7 @@ const RealtorsData = [
   },
   {
     title: 'luxury apartment',
+    image: avatar,
     realtor: 'Alice Johnson',
     type: '2-bedroom',
     status: ['pending', 'rent'] as [StatusProps['stat_1'], StatusProps['stat_2']],
@@ -40,10 +50,27 @@ const RealtorsData = [
 
 // Define columns
 const RealtorColumns = [
-  columnHelper.accessor('title', {
-    header: 'Title',
-    cell: (info) => info.getValue(),
-  }),
+      columnHelper.accessor('image', {
+        header: 'Title',
+        cell: (info) => {
+          const { image, title } = info.row.original;
+          return (
+            <div className="flex items-center gap-2">
+              <Image
+                src={image}
+                width={10}
+                height={10}
+                alt={title}
+                className="w-12 h-12 "
+              />
+              <div className="flex flex-col">
+                <span>{title}</span>
+                <span className='text-slate-500'>address</span>
+              </div>
+            </div>
+          );
+        },
+      }),
   columnHelper.accessor('type', {
     header: 'Type',
     cell: (info) => info.getValue(),
@@ -73,7 +100,7 @@ const RealtorColumns = [
           <form className="relative border border-accent rounded-md pl-5 py-2">
             <FormControl
               as="input"
-              className='bg-transparent'
+              className="bg-transparent"
               containerClass="bg-background rounded-md"
               placeholder="search here"
             />
@@ -87,6 +114,7 @@ const RealtorColumns = [
         </div>
       </div>
       <TanstackTable checkbox columns={RealtorColumns} data={RealtorsData} />
+      <Pagination />
     </div>
   );
 }
