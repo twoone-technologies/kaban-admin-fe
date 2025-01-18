@@ -94,7 +94,7 @@ const router = useRouter();
           </button>
         </div>
       </div>
-      <TanstackTable handleLink={(e) => router.push(`realtors/${e}`)} checkbox columns={RealtorColumns} data={RealtorsData} />
+      <TanstackTable handleLink={(id) => router.push(`./realtors/${id}`)} checkbox columns={RealtorColumns} data={RealtorsData} />
     </div>
 		</Container>
   );
