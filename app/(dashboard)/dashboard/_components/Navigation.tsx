@@ -20,7 +20,7 @@ export default function Navigation({
 
   return (
     <div
-      className={`border-b flex w-full p-2 justify-between sticky top-0 items-center border-accent bg-background`}
+      className={`border-b flex w-full p-2 justify-between sticky  z-50 top-0 items-center border-accent bg-background`}
     >
       <span>{pathName ? capitalizeString(pathName) : 'Dashboard'}</span>
       {isMobile ? (

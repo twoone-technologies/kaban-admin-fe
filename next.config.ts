@@ -1,40 +1,41 @@
-// Import the MiniCssExtractPlugin
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import type { NextConfig } from 'next';
 
-/**
- * The generics are for autocomplete purposes only. They are not used in the code.
- * 
- * @template {import('next').NextConfig} T 
- * @param {T} config - a generic parameter that flows through to the return type
- * @constraint {{import ('next').NextConfig} T}
- **/
-
-function defineNextConfig(config: {
-    reactStrictMode: boolean;
-    // swcMinify: true,
-    webpack(config: { module: { rules: { test: RegExp; use: { loader: string; options: { icon: boolean; }; }[]; }[]; }; plugins: MiniCssExtractPlugin[]; }, { isServer }: never): { module: { rules: { test: RegExp; use: { loader: string; options: { icon: boolean; }; }[]; }[]; }; plugins: MiniCssExtractPlugin[]; };
-  }) {
-  return config;
-}
-
-export default defineNextConfig({
+const config: NextConfig = {
   reactStrictMode: true,
-  // swcMinify: true,
+  
+  // Explicitly define a valid redirects function
+  async redirects() {
+    return [
+      // Example of a valid redirect; update with your actual requirements
+      {
+        source: '/old-route',
+        destination: '/new-route',
+        permanent: true, // HTTP 308 for permanent redirects
+      },
+    ];
+  },
 
-  webpack(config: { module: { rules: { test: RegExp; use: { loader: string; options: { icon: boolean; }; }[]; }[]; }; plugins: MiniCssExtractPlugin[]; }, { isServer }: never) {
+  webpack: (config, { isServer }) => {
+    // Add SVGR loader for SVG files
     config.module.rules.push({
       test: /\.svg$/,
       use: [{ loader: '@svgr/webpack', options: { icon: true } }],
     });
 
-    // Add MiniCssExtractPlugin only on the client-side
     if (!isServer) {
-      config.plugins.push(new MiniCssExtractPlugin({
-        filename: 'static/css/[name].[contenthash].css',
-        chunkFilename: 'static/css/[id].[contenthash].css',
-      }));
+      // Add MiniCssExtractPlugin only for client-side builds
+      config.plugins = [
+        ...(config.plugins || []),
+        new MiniCssExtractPlugin({
+          filename: 'static/css/[name].[contenthash].css',
+          chunkFilename: 'static/css/[id].[contenthash].css',
+        }),
+      ];
     }
 
     return config;
   },
-});
+};
+
+export default config;
