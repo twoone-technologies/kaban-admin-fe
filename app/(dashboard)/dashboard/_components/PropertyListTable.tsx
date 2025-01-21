@@ -4,7 +4,7 @@ import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import StatusBadge, { StatusProps } from "./StatusBadge";
 import TanstackTable from './TanstackTable';
 
-export default function PropertyListTable() {
+export default function PropertyListTable({handleLink}: {handleLink?: (index: number) => void}) {
   const columnHelper = createColumnHelper<{
     title: string;
     type: string;
@@ -86,7 +86,7 @@ const RealtorColumns = [
           </button>
         </div>
       </div>
-      <TanstackTable checkbox columns={RealtorColumns} data={RealtorsData} />
+      <TanstackTable checkbox handleLink={(e) => handleLink && handleLink(e)} columns={RealtorColumns} data={RealtorsData} />
     </div>
   );
 }
