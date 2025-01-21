@@ -83,7 +83,7 @@ export default function FormControl({
                 <SelectTrigger className={className}>
                     <SelectValue placeholder={placeholder || "Select..."} />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-accent-foreground text-slate-400 border-none">
                     {options.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                             {option.label}

@@ -1,6 +1,5 @@
 'use client';
 import { BellIcon, ChevronLeft, SquareX, Search } from 'lucide-react';
-// import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -14,7 +13,6 @@ import {
 } from '@/public/icons';
 import ProfileCard from './ProfileCard';
 import { useState } from 'react';
-// import Image from 'next/image';
 
 export interface IsCollapsedProps {
   isCollapsed?: boolean;
