@@ -29,55 +29,63 @@ export default function Basic() {
       <Map />
       <div className="flex justify-end gap-4">
         <Button className="min-w-28 text-white">Approve</Button>
-      <Dialog>
-        <DialogTrigger asChild>
-        <Button variant={'destructive'} className="min-w-28 text-white">
-          Disapprove
-        </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[40rem] text-text">
-          <DialogHeader>
-            <DialogTitle>Reason</DialogTitle>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="1" />
-              <label htmlFor="1">Review ¨Property Description¨ sub-header</label>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant={'destructive'} className="min-w-28 text-white">
+              Disapprove
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[40rem] text-text">
+            <DialogHeader>
+              <DialogTitle>Reason</DialogTitle>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="flex gap-2 items-center">
+                <Checkbox id="1" />
+                <label htmlFor="1">
+                  Review ¨Property Description¨ sub-header
+                </label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Checkbox id="2" />
+                <label htmlFor="2">Review ¨Price¨ sub-header</label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Checkbox id="3" />
+                <label htmlFor="3">Review ¨Details¨ sub-header</label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Checkbox id="4" />
+                <label htmlFor="4">Review ¨Image¨ sub-header</label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Checkbox id="5" />
+                <label htmlFor="5">Review ¨Location¨ sub-headerr</label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Checkbox id="6" />
+                <label htmlFor="6">Review ¨Map¨ sub-header</label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Checkbox id="7" />
+                <label htmlFor="7">Duplicate Listing</label>
+              </div>
+              <div className="flex gap-2 items-center">
+                <Checkbox id="8" />
+                <label htmlFor="8">Violation of Terms of Servicer</label>
+              </div>
             </div>
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="2" />
-              <label htmlFor="2">Review ¨Price¨ sub-header</label>
-            </div>
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="3" />
-              <label htmlFor="3">Review ¨Details¨ sub-header</label>
-            </div>
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="4" />
-              <label htmlFor="4">Review ¨Image¨ sub-header</label>
-            </div>
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="5" />
-              <label htmlFor="5">Review ¨Location¨ sub-headerr</label>
-            </div>
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="6" />
-              <label htmlFor="6">Review ¨Map¨ sub-header</label>
-            </div>
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="7" />
-              <label htmlFor="7">Duplicate Listing</label>
-            </div>
-            <div className='flex gap-2 items-center'>
-              <Checkbox id="8" />
-              <label htmlFor="8">Violation of Terms of Servicer</label>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button className='text-white' variant={'destructive'} type="button">Disapprove</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+            <DialogFooter>
+              <Button
+                className="text-white"
+                variant={'destructive'}
+                type="button"
+              >
+                Disapprove
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );

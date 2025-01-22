@@ -16,14 +16,16 @@ type TableProps = {
   checkbox?: boolean;
   others?: boolean;
   nil?: boolean;
-  handleLink?: (index: number) => void;
+  handleDelete?: (index: string) => void;
+  handleEdit?: (index: string) => void;
 };
 
 export default function TanstackTable({
   columns,
   data,
   checkbox,
-  handleLink,
+  handleDelete,
+  handleEdit,
   others,
   nil,
 }: TableProps) {
@@ -87,7 +89,6 @@ export default function TanstackTable({
         {table.getRowModel().rows.map((row, rowIndex) => (
           <tr
             key={row.id}
-            onClick={() => handleLink && handleLink(rowIndex)}
             className={`hover:bg-gray-900 transition-colors duration-150 ${
               rowIndex === table.getRowModel().rows.length - 1
                 ? ''
@@ -113,15 +114,15 @@ export default function TanstackTable({
                 {others ? (
                   <div className="flex space-x-2">
                     <DeleteIcon
-                      onClick={() => console.log('Edit row:', row.id)}
+                      onClick={() => handleDelete && handleDelete(row.id)}
                     />
                     <EditIcon
-                      onClick={() => console.log('Delete row:', row.id)}
+                      onClick={() =>handleEdit && handleEdit(row.id)}
                     />
                   </div>
                 ) : (
                   <DeleteIcon
-                  onClick={() => console.log('Edit row:', row.id)}
+                  onClick={() => handleDelete && handleDelete(row.id)}
                 />
                 )}
               </td>

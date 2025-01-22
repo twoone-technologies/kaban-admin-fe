@@ -3,9 +3,11 @@ import { SearchIcon } from 'lucide-react';
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import StatusBadge, { StatusProps } from "./StatusBadge";
 import TanstackTable from './TanstackTable';
+import { useRouter } from 'next/navigation';
 
-export default function PropertyListTable({handleLink}: {handleLink?: (index: number) => void}) {
+export default function PropertyListTable() {
   const columnHelper = createColumnHelper<{
+    id: number;
     title: string;
     type: string;
     realtor: string;
@@ -16,6 +18,7 @@ export default function PropertyListTable({handleLink}: {handleLink?: (index: nu
 // Sample data for the table
 const RealtorsData = [
   {
+    id: 1,
     title: 'luxury apartment',
     realtor: 'John Doe',
     type: 'apartment',
@@ -23,6 +26,7 @@ const RealtorsData = [
     uploadDate: '2024-12-01',
   },
   {
+    id: 2,
     title: 'luxury apartment',
     realtor: 'Jane Smith',
     type: 'self-contained',
@@ -30,6 +34,7 @@ const RealtorsData = [
     uploadDate: '2024-11-25',
   },
   {
+    id: 3,
     title: 'luxury apartment',
     realtor: 'Alice Johnson',
     type: '2-bedroom',
@@ -38,11 +43,23 @@ const RealtorsData = [
   },
 ];
 
+const router = useRouter();
+
 // Define columns
 const RealtorColumns = [
   columnHelper.accessor('title', {
     header: 'Title',
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      const { title, id } = info.row.original;
+      return (
+        <span
+          onClick={() => router.push(`./listings/${id}`)}
+          className="font-semibold underline cursor-pointer"
+        >
+          {title}
+        </span>
+      );
+    },
   }),
   columnHelper.accessor('type', {
     header: 'Type',
@@ -86,7 +103,7 @@ const RealtorColumns = [
           </button>
         </div>
       </div>
-      <TanstackTable checkbox handleLink={(e) => handleLink && handleLink(e)} columns={RealtorColumns} data={RealtorsData} />
+      <TanstackTable checkbox columns={RealtorColumns} data={RealtorsData} />
     </div>
   );
 }

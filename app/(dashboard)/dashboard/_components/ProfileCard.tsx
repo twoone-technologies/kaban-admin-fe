@@ -1,8 +1,8 @@
 'use client';
 import Rating from '@/components/common/Ratings';
-import { DashboardIcon, UserIcon, VerifyIcon } from '@/public/icons';
+import { VerifyIcon } from '@/public/icons';
 import avatar from '@/public/icons/avatar.png';
-import Image from 'next/image';
+import Image from 'next/image'
 
 type AgentProps = {
   src?: string | undefined | null;
@@ -12,24 +12,18 @@ type AgentProps = {
   isVerified?: boolean;
   className?: string;
   star?: number;
-  open?: boolean;
-  onClick?: React.ChangeEventHandler<HTMLDivElement> &
-    React.MouseEventHandler<HTMLDivElement>;
 };
 
 export default function ProfileCard({
   name,
   role,
   star,
-  onClick,
   isVerified,
-  open,
   className,
   isCollapsed,
 }: AgentProps) {
   return (
     <div
-      onClick={(e) => onClick && onClick(e)}
       className={`cursor-pointer relative flex gap-4 items-center f-width align-y px-3 py-3 ${className}`}
     >
       <div
@@ -46,20 +40,6 @@ export default function ProfileCard({
         </div>
         <span className={`text-base`}>{role}</span>
         {star && <Rating num={star} />}
-      </div>
-      <div
-        className={`fixed max-w-max left-2 bottom-24 flex w-full transition-all bg-accent-foreground flex-col border border-accent rounded-lg
-        ${open ? 'block' : 'hidden'}
-        `}
-      >
-        <div className="flex items-center rounded-lg gap-2 hover:bg-background p-3">
-          <UserIcon />
-          <span>Users</span>
-        </div>
-        <div className="flex items-center rounded-lg gap-2 hover:bg-background p-3">
-          <DashboardIcon />
-          <span>Role Management</span>
-        </div>
       </div>
     </div>
   );

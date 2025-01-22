@@ -7,6 +7,7 @@ import FormControl from '@/components/common/FormControl';
 import { SearchIcon } from 'lucide-react';
 import ButtonSwitch from './ButttonSwitch';
 import Image from 'next/image';
+import CustomModal from './CustomModal';
 
 export default function UserListTable() {
   const [realtorsData, setRealtorsData] = useState([
@@ -92,6 +93,9 @@ export default function UserListTable() {
     }),
   ] as unknown as ColumnDef<unknown, unknown>[];
 
+  const [open, setOpen] = useState(false);
+  const [purpose, setPurpose] = useState<'edit' | 'delete'>('edit');
+
   return (
     <div className="border min-w-max border-accent rounded-lg p-3">
       <div className="flex justify-between items-center mb-4">
@@ -100,7 +104,7 @@ export default function UserListTable() {
           <form className="relative border border-accent rounded-md pl-5 py-2">
             <FormControl
               as="input"
-              className='bg-transparent'
+              className="bg-transparent"
               containerClass="bg-background rounded-md"
               placeholder="Search here"
             />
@@ -113,7 +117,20 @@ export default function UserListTable() {
           </button>
         </div>
       </div>
-      <TanstackTable others columns={RealtorColumns} data={realtorsData} />
+      <TanstackTable
+        others
+        handleEdit={() => {
+          setOpen(true);
+          setPurpose('edit');
+        }}
+        handleDelete={() => {
+          setOpen(true);
+          setPurpose('delete');
+        }}
+        columns={RealtorColumns}
+        data={realtorsData}
+      />
+      <CustomModal open={open} onChange={setOpen} purpose={purpose} />
     </div>
   );
 }
