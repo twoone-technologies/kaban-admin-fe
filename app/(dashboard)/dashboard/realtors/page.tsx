@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Realtors() {
   const columnHelper = createColumnHelper<{
+    id: number;
     name: string;
     contactInfo: string;
     status: StatusProps['stat_1'];
@@ -20,6 +21,7 @@ export default function Realtors() {
 // Sample data for the table
 const RealtorsData = [
   {
+    id: 1,
     name: 'John Doe',
     contactInfo: 'johndoe@example.com',
     listings: '40',
@@ -27,6 +29,7 @@ const RealtorsData = [
     listingsLastActive: '2024-12-01',
   },
   {
+    id: 2,
     name: 'Jane Smith',
     contactInfo: 'janesmith@example.com',
     listings: '40',
@@ -34,6 +37,7 @@ const RealtorsData = [
     listingsLastActive: '2024-11-25',
   },
   {
+    id: 3,
     name: 'Alice Johnson',
     contactInfo: 'alicej@example.com',
     listings: '40',
@@ -46,7 +50,17 @@ const RealtorsData = [
 const RealtorColumns = [
   columnHelper.accessor('name', {
     header: 'Name',
-    cell: (info) => info.getValue(),
+    cell: (info) => {
+      const { name, id } = info.row.original;
+      return (
+        <span
+          onClick={() => router.push(`./realtors/${id}`)}
+          className="font-semibold underline cursor-pointer"
+        >
+          {name}
+        </span>
+      );
+    },
   }),
   columnHelper.accessor('contactInfo', {
     header: 'Contact Info',
@@ -94,7 +108,7 @@ const router = useRouter();
           </button>
         </div>
       </div>
-      <TanstackTable handleLink={(id) => router.push(`./realtors/${id}`)} checkbox columns={RealtorColumns} data={RealtorsData} />
+      <TanstackTable checkbox columns={RealtorColumns} data={RealtorsData} />
     </div>
 		</Container>
   );

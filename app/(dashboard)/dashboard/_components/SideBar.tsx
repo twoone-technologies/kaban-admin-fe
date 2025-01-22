@@ -10,9 +10,9 @@ import {
   PostIcon,
   RealtorsIcon,
   ReportIcon,
+  UserIcon,
 } from '@/public/icons';
 import ProfileCard from './ProfileCard';
-import { useState } from 'react';
 
 export interface IsCollapsedProps {
   isCollapsed?: boolean;
@@ -71,10 +71,16 @@ function SideBar({
       icon2: '/assets/icons/paper-green.svg',
       path: '/dashboard/inbox',
     },
+    {
+      id: 7,
+      name: 'Users',
+      icon1: <UserIcon />,
+      icon2: '/assets/icons/paper-green.svg',
+      path: '/dashboard/users',
+    },
   ];
 
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
   // console.log(pathname.split('/'))
 
   function isActiveBar(path: string) {
@@ -144,8 +150,6 @@ function SideBar({
             className="w-full relative px-2"
             role={'admin'}
             name={'sprite can'}
-            open={open}
-            onClick={() => setOpen(!open)}
           />
         </div>
       </aside>
@@ -198,8 +202,6 @@ function SideBar({
             className="w-full relative px-2"
             role={'admin'}
             name={'sprite can'}
-            open={open}
-            onClick={() => setOpen(!open)}
           />
         </div>
       </aside>

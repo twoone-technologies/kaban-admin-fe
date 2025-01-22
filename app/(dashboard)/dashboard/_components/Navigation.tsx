@@ -15,6 +15,7 @@ export default function Navigation({
   const pathName = path.split('/')[2];
 
   function capitalizeString(str: string) {
+    if (str === 'roleManagement') return 'Role Management'
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
