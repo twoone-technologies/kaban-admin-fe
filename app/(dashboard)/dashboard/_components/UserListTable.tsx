@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import TanstackTable from './TanstackTable';
-// import ButtonSwitch from './ButtonSwitch';
 import avatar from '@/public/icons/avatar.png';
 import FormControl from '@/components/common/FormControl';
 import { SearchIcon } from 'lucide-react';
