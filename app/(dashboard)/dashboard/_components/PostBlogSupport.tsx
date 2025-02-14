@@ -3,39 +3,48 @@ import { SearchIcon, ListFilter, ChevronDown } from 'lucide-react';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import StatusBadge, { StatusProps } from './StatusBadge';
 import TanstackTable from './TanstackTable';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import avatar from '@/public/icons/avatar.png';
 import { useState } from 'react';
 
-export default function PostBlogSupport() {
-  const columnHelper = createColumnHelper<{
-    title: string;
-    image: string;
-    category: string;
-    status: StatusProps['stat_1'];
-    date: string;
-  }>();
+export type Realtor = {
+  image: string | StaticImageData;
+  title: string;
+  category: 'blog' | 'support';
+  status: StatusProps['stat_1'];
+  date: string;
+};
 
-  // Sample data for the table
-  const RealtorsData = [
+export default function PostBlogSupport({
+  columns,
+  data,
+  handleSort,
+}: {
+  columns?: ColumnDef<unknown, unknown>[];
+  data?: Realtor[];
+  handleSort?: (category: 'support' | 'blog') => void;
+}) {
+  const columnHelper = createColumnHelper<Realtor>();
+
+  const RealtorsData: Realtor[] = [
     {
       image: avatar,
       title: 'John Doe',
-      category: 'johndoe@example.com',
+      category: 'blog',
       status: 'verified' as StatusProps['stat_1'],
       date: '2024-12-01',
     },
     {
       image: avatar,
       title: 'Jane Smith',
-      category: 'janesmith@example.com',
+      category: 'support',
       status: 'denied' as StatusProps['stat_1'],
       date: '2024-11-25',
     },
     {
       image: avatar,
       title: 'Alice Johnson',
-      category: 'alicej@example.com',
+      category: 'blog',
       status: 'pending' as StatusProps['stat_1'],
       date: '2024-12-05',
     },
@@ -78,7 +87,9 @@ export default function PostBlogSupport() {
     }),
   ] as unknown as ColumnDef<unknown, unknown>[];
 
+  
   const [activeTab, setActiveTab] = useState(0);
+
   return (
     <div className="border min-w-max border-accent rounded-lg p-3">
       <div className="flex justify-between gap-2 items-center mb-4">
@@ -86,8 +97,13 @@ export default function PostBlogSupport() {
           {['All Post', 'Blog', 'Support'].map((tab, id) => (
             <span
               key={id}
-              className={`${activeTab === id ? 'text-white bg-background' : ''} px-6 py-1 rounded-md cursor-pointer`}
-              onClick={() => setActiveTab(id)}
+              className={`${
+                activeTab === id ? 'text-white bg-background' : ''
+              } px-6 py-1 rounded-md cursor-pointer`}
+              onClick={() => {
+                setActiveTab(id);
+                if (handleSort) handleSort(tab.toLocaleLowerCase() as 'support' | 'blog');
+              }}
             >
               {tab}
             </span>
@@ -97,7 +113,7 @@ export default function PostBlogSupport() {
           <form className="relative border border-accent rounded-md pl-5 py-2">
             <FormControl
               as="input"
-              className='bg-transparent'
+              className="bg-transparent"
               containerClass="bg-background rounded-md"
               placeholder="search here"
             />
@@ -120,8 +136,8 @@ export default function PostBlogSupport() {
       <TanstackTable
         checkbox
         others
-        columns={RealtorColumns}
-        data={RealtorsData}
+        columns={columns || RealtorColumns}
+        data={data || RealtorsData}
       />
     </div>
   );
