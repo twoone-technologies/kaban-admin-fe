@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeftIcon } from 'lucide-react';
 import { Controller, FieldValues, useForm } from 'react-hook-form';
 import Tiptap from './Tiptap';
-// import TextFormatTool from './TextFormatTool';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import TextAlign from '@tiptap/extension-text-align';
@@ -26,14 +25,7 @@ export default function PostForm() {
   const [subtitle, setSubtitle] = useState('');
   const [bold, setBold] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  // Cover Image Upload
-  // const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  // const [base64Image, setBase64Image] = useState<string | null>(null);
-  // const [uploading, setUploading] = useState(false);
-
-  // Convert file to Base64 (so it can be stored in an input field)
-
   // Convert file to Base64
   const fileToBase64 = (file: File) => {
     return new Promise<string>((resolve, reject) => {
